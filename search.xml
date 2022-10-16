@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>基础算法——浮点二分</title>
+      <link href="/2022/10/16/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%B5%AE%E7%82%B9%E4%BA%8C%E5%88%86/"/>
+      <url>/2022/10/16/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%B5%AE%E7%82%B9%E4%BA%8C%E5%88%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="浮点数的二分"><a href="#浮点数的二分" class="headerlink" title="浮点数的二分"></a>浮点数的二分</h1><pre class="line-numbers language-c_cpp" data-language="c_cpp"><code class="language-c_cpp">//按照精度while(r - l &gt; 10-8){  int mid = (l+r) / 2;  if(check(mid)) l = mid;  else r = mid;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-c_cpp" data-language="c_cpp"><code class="language-c_cpp">//按照循环次数for(int i=1; i&lt;=10000; i++){  int mid = (l + r) / 2;  if(check(mid)) l = mid;  else r = mid;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法基础 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>基础算法——二分</title>
       <link href="/2022/10/16/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%95%B4%E6%95%B0%E4%BA%8C%E5%88%86/"/>
       <url>/2022/10/16/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%95%B4%E6%95%B0%E4%BA%8C%E5%88%86/</url>
