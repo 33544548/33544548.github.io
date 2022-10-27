@@ -61,6 +61,25 @@
     
     
     <entry>
+      <title>基础算法——区间合并</title>
+      <link href="/2022/10/17/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6/"/>
+      <url>/2022/10/17/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="区间合并"><a href="#区间合并" class="headerlink" title="区间合并"></a>区间合并</h1><ul><li>问题描述：<strong>给定n个区间的左右端点（闭区间），求将所有区间合并后的区间个数</strong></li><li>思路：<strong>根据左端点排序，再分类讨论</strong></li></ul><img src="/2022/10/17/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6/6902318bdc2f7826b99794aaf8e72bc0.png" alt="screen-capture" style="zoom:50%;"><pre class="line-numbers language-c_cpp" data-language="c_cpp"><code class="language-c_cpp">#include&lt;bits/stdc++.h&gt;using namespace std;typedef pair&lt;int, int&gt; PII;const int N = 100010;int n;PII seg[N];int main() {    cin &gt;&gt; n;    for(int i=1; i&lt;=n; i++) {        int l, r;        cin &gt;&gt; l &gt;&gt; r;        seg[i] = {l, r};    }    sort(seg+1, seg+1+n);    int ans = 1, l = seg[1].first, r = seg[1].second;    for(int i=2; i&lt;=n; i++){        if(seg[i].first &lt;= r &amp;&amp; seg[i].second &gt;= r){            r = seg[i].second;        }else if(seg[i].first &gt; r){            l = seg[i].first, r = seg[i].second;            ans++;        }    }        cout &lt;&lt; ans;    return 0;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>注：区间问题常用贪心+端点排序的方法解决。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法基础 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>基础算法——浮点二分</title>
       <link href="/2022/10/16/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%B5%AE%E7%82%B9%E4%BA%8C%E5%88%86/"/>
       <url>/2022/10/16/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%B5%AE%E7%82%B9%E4%BA%8C%E5%88%86/</url>
