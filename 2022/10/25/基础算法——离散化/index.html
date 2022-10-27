@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="致生活, 游吟诗人的博客">
+    <meta name="keywords" content="基础算法——离散化, 游吟诗人的博客">
     <meta name="description" content="探索文字奥秘">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>致生活 | 游吟诗人的博客</title>
+    <title>基础算法——离散化 | 游吟诗人的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -322,12 +322,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">致生活</h1>
+                    <h1 class="description center-align post-title">基础算法——离散化</h1>
                 </div>
             </div>
         </div>
@@ -448,6 +448,15 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" class="post-category">
+                                算法基础
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -455,28 +464,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-15
+                    2022-10-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-15
+                    2022-10-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    381
+                    365
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -499,11 +508,74 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>太阳渐渐变得热情了，一扫之前的冷漠，大大方方将它的热与光撒了一地，然在这炎热的夏天，它却殊不知自己的光热无人需要。生活你，不也是如此。在需要的时候将我推至身外，在不需要时黏着我。</p>
-<p>（此处省略生活如何怪n字）</p>
-<p>生活何时变得这样怪？遥想唐宋，文人怀才不遇郁郁不得志，有借酒消愁岳阳楼，有写诗志志名阁上。生活的大矛不论过了多少年，多少世纪也不曾落下。或许生活并不像之前所想的那样滋润悠闲，它从来没有变，从来都像一座不断倾斜、随时塌毁的比萨斜塔。</p>
-<p>我开始崇仰起唐代诗人刘禹锡，为什么？因为他多次遭贬谪仍乐观自信，因为他寓居陋室不曾失意反写下《陋室铭》名垂千古。他是真正能与生活的矛头对着来的人，中国史上不缺乏这样的人：“长风破浪会有时，直挂云帆济沧海”的李白、“一蓑烟雨任平生”的苏轼、“山穷水复疑无路，柳暗花明又一村”的陆游等等。</p>
-<p>或许乐观也是中华民族从古到今传承下来的民族禀赋之一？正如好茶需要时间的沉淀，乐观需要岁月的打磨。兴许在许久的将来，能传承下这乐观精神罢。</p>
+                <h1 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h1><p>将稀疏的，大的下标映射到连续的小的下标，减少空间占用</p>
+<p>查询映射O(log n)</p>
+<pre class="line-numbers language-c_cpp" data-language="c_cpp"><code class="language-c_cpp">sort(a.begin(), a.end());
+a.erase(unique(a.begin(), a.end()), a.end());
+
+int find(int x){
+  int l = 0, r = a.size() - 1;
+  while(l &lt; r){
+    int mid = l + r &gt;&gt; 1;
+    if(a[mid] &gt;= x) r = mid;
+    else l = mid + 1;
+  }
+  return r + 1; //映射到1,2,3,...,n。 若要映射到0开始的，则return r;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="例题-Acwing-P802"><a href="#例题-Acwing-P802" class="headerlink" title="例题 Acwing P802"></a>例题 Acwing P802</h2><p>先预处理所用到的所有下标，进行离散化，之后再用 O(n + 2m) 的空间，利用前缀和O(1) 求出答案</p>
+<pre class="line-numbers language-c_cpp" data-language="c_cpp"><code class="language-c_cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+typedef pair&lt;int, int&gt; PII;
+const int N = 300010;
+int n, m;
+
+
+vector&lt;PII&gt; add, query;
+vector&lt;int&gt; num;
+int a[N], s[N];
+
+int find(int x){
+    int l = 0, r = num.size()-1;
+    while(l &lt; r){
+        int mid = l + r &gt;&gt; 1;
+        if(num[mid] &gt;= x) r = mid;
+        else l = mid + 1;
+    }
+    return r + 1;
+}
+
+int main() {
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i=0; i&lt;n; i++){
+        int x, c;
+        cin &gt;&gt; x &gt;&gt; c;
+        add.push_back({x, c});
+        num.push_back(x);
+    }
+    for(int i=0; i&lt;m; i++){
+        int l, r;
+        cin &gt;&gt; l &gt;&gt; r;
+        query.push_back({l, r});
+        num.push_back(l), num.push_back(r);
+    }
+    
+    sort(num.begin(), num.end());
+    num.erase(unique(num.begin(), num.end()), num.end());
+    for(int i=0; i&lt;n; i++){
+        int x = find(add[i].first), c = add[i].second;
+        a[x] += c;
+    }
+    
+    for(int i=1; i&lt;=num.size(); i++)
+        s[i] = s[i-1] + a[i];
+    for(int i=0; i&lt;m; i++){
+        int l = find(query[i].first), r = find(query[i].second);
+        cout &lt;&lt; s[r] - s[l-1] &lt;&lt; endl;
+    }
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -530,7 +602,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://33544548.github.io/2022/07/15/%E7%94%9F%E6%B4%BB/">http://33544548.github.io/2022/07/15/%E7%94%9F%E6%B4%BB/</a>
+                    <a href="http://33544548.github.io/2022/10/25/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/">http://33544548.github.io/2022/10/25/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -631,54 +703,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/08/25/%E7%8F%8D%E7%8F%8D%E6%89%93%E7%A0%B4%E4%BA%86%E9%A5%AD%E7%A2%97%E6%89%93%E6%B2%B9%E8%AF%97/">
+                <a href="/2022/10/25/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="珍珍打破了饭碗">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="基础算法——离散化">
                         
-                        <span class="card-title">珍珍打破了饭碗</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-08-25
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            游吟诗人
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/06/18/%E8%AE%A9%E5%AE%83%E7%83%A7/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="让它烧">
-                        
-                        <span class="card-title">让它烧</span>
+                        <span class="card-title">基础算法——离散化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -689,12 +725,58 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-25
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            游吟诗人
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    算法基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/10/20/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="基础算法——前缀和与差分">
+                        
+                        <span class="card-title">基础算法——前缀和与差分</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    算法基础
+                                </a>
+                            
                             
                         </span>
                     </div>
